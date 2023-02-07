@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+      #myFeature{
+        color: black;
+        font-size: 36px;
+        text-align: center;
+      }
+      #myspanFeature{
+        color: black;
+        font-size: 18px;
+      }
+      #mytopicFeature{
+        color: black;
+        font-size: 22px;
+        text-align: center;
+        border: 2px solid gray;
+        border-radius: 10px;
+      }
+  </style>
+</head>
+<body onload="disableOnLoad()">
+    <!-- header -->
+    <header class="p-3 text-bg-dark">
+        <div class="container">
+          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+              <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+            </a>
+    
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+              <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+              <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
+              <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+              <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+              <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+            </ul>
+    
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+              <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
+            </form>
+    
+            <div class="text-end">
+              <button type="button" class="btn btn-outline-light me-2">Login</button>
+              <button type="button" class="btn btn-warning">Sign-up</button>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- End header -->
+
+      <!-- features -->
+      <div class="px-4 py-1 my-4 text-center">
+        <img class="d-block mx-auto mb-4" src="http://dokterbob.github.io/dc-grid-presentation/img/dc.png" alt="" width="252" height="200">
+        <h1 class="display-8 fw-bold">ไฟฟ้ากระแสตรง</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">ไฟฟ้ากระแสตรง (Direct Current, DC) คือกระแสไฟฟ้าที่มีทิศทางในการเคลื่อนที่เป็นวงจรไปในทิศทางเดียวกัน โดยไหลจากขั้วลบของแหล่งกำเนิดไฟฟ้าผ่านอุปกรณ์ไฟฟ้าแล้วกลับเข้าไปยังขั้วบวกของแหล่งกำเนิดไฟฟ้า<br>อีกครั้ง ตัวอย่างของไฟฟ้ากระแสตรงที่ใช้อยู่ในชีวิตประจำวันก็ได้แก่ แบตเตอรี่รถยนต์ เป็นต้น </p>
+        </div>
+        <div id="mytopicFeature" class="col-lg-9 mx-auto">
+          <p class="border-bottom">คำนวณค่าแรงดันไฟฟ้า, กระแสไฟฟ้า และความต้านทาน</p><br>
+          <select id="selector" onchange="disableInput()">
+            <option value="" selected disabled>ค่าที่ต้องการหา</option>
+            <option value="voltage">แรงดันไฟฟ้า</option>
+            <option value="current">กระแสไฟฟ้า</option>
+            <option value="resistance">ความต้านทาน</option>
+          </select>
+          <style>
+            input[readonly] {
+            background-color: rgb(218, 205, 205);
+            }
+          </style>
+          <label style="font-size: 20px;">แรงดันไฟฟ้า:</label>
+          <input id="voltage" type="text">
+          <label style="font-size: 20px;">กระแสไฟฟ้า:</label>
+          <input id="current" type="text">
+          <label style="font-size: 20px;">ความต้านทาน:</label>
+          <input id="resistance" type="text"><br><br>
+          <button onclick="calculate()" style="background-color: blanchedalmond; width: 150px;">คำนวณค่า</button><br><br>
+          <div id="result" style="color: black"></div>
+        </div>
+      </div>
+         
+      <div class="container px-2 py-0" id="featured-3">
+        <h2 class="pb-2 border-bottom">สูตรการคำนวณ</h2>
+        <div class="row g-4 py-2 row-cols-1 row-cols-lg-3">
+          <div class="feature col">
+            <h3 class="fs-3">แรงดันไฟฟ้า (V)</h3>
+            <p>แรงดันไฟฟ้า (Voltage, V) คำนวณได้จากนำค่ากระแสไฟฟ้า<br> <b>คูณด้วย</b> ค่าความต้านทาน</p>
+            <!--<p>แรงดันไฟฟ้า (Voltage, V) เกิดจากการที่มีอิเล็กตรอนไหลในสายไฟ ซึ่งการที่อิเล็กตรอนไหลหรือเคลื่อนที่ได้นั้นจะต้องมีแรงมากระทำต่ออิเล็กตรอนทำให้เกิดกระแสไหล แรงดังกล่าวนี้เรียกว่า แรงดันไฟฟ้า แรงดันไฟฟ้า 1 โวลต์ คือ แรงดันที่ทำให้กระแสไฟฟ้า 1 แอมแปร์ไหลผ่านเข้าไปในความต้านทาน 1 โอห์ม</p>-->
+            <p><strong>มีหน่วยเป็น โวลต์ หรือ Volt ย่อด้วย V</strong></p>
+            <p id="myFeature">V = I x R
+              <span id="myspanFeature"> (Volt, V)</span>
+            </p>
+          </div>
+          <div class="feature col">
+            <h3 class="fs-3">กระแสไฟฟ้า (I)</h3>
+            <p>กระแสไฟฟ้า (Ampere, A) คำนวณได้จากนำค่าแรงดันไฟฟ้า<br> <b>หารด้วย</b> ค่าความต้านทาน</p>
+            <!--<p>กระแสไฟฟ้า (Ampere, A) เป็นค่าที่ใช้วัดการไหลของไฟฟ้าซึ่งสามารถที่จะยกตัวอย่างให้เห็นภาพง่าย ๆ เหมือนกับการที่น้ำไหลอยู่ภายในสายยาง โดยปริมาณของน้ำนั้น จะเปรียบเทียบได้กับการไหลของกระแสไฟฟ้า ยิ่งน้ำในท่อสายยางมีจำนวนมาก ก็จะเปรียบเทียบได้กับความแรงของกระแสไฟฟ้า</p>-->
+            <p><strong>มีหน่วยเป็น แอมแปร์ หรือ Ampere ย่อด้วย A</strong></p>
+            <p id="myFeature">I = 
+              <sup>V</sup>
+              /
+              <sub>R</sub> 
+              <span id="myspanFeature"> (Amp, A)</span>
+            </p>
+          </div>
+          <div class="feature col">
+            <h3 class="fs-3">ความต้านทาน (R)</h3>
+            <p>ความต้านทานไฟฟ้า (Ohm, Ω) คำนวณได้จากนำค่าแรงดันไฟฟ้า<b>หารด้วย</b> ค่ากระแสไฟฟ้า</p>
+            <!--<p>ความต้านทานไฟฟ้า (Ohm, Ω) เป็นสมบัติเฉพาะของวัตถุในการที่จะขวางหรือต้านทานการไหลของกระแสไฟฟ้าที่จะไหลผ่านวัตถุนั้น ๆ ไป ความต้านทาน 1 โอห์ม คือ ความต้านทานของเส้นลวดที่ยอมให้กระแสไฟฟ้าไหลผ่านได้ 1 แอมแปร์ เมื่อใช้แรงดันไฟฟ้า 1 โวลต์</p>-->
+            <p><strong>ความต้านทานมีหน่วยเป็น โอห์ม หรือ Ohm ย่อด้วย Ω</strong></p>
+            <p id="myFeature">R = 
+              <sup>V</sup>
+              /
+              <sub>I</sub> 
+              <span id="myspanFeature"> (Ohm, Ω)</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- End features -->
+
+
+      <!-- footer -->
+      <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+          <div class="col-md-4 d-flex align-items-center">
+            <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+              <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+            </a>
+            <span class="mb-3 mb-md-0 text-muted">© 2023 Company, Inc</span>
+          </div>
+      
+          <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
+            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
+            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
+          </ul>
+        </footer>
+      </div>
+      <!-- End footer -->
+    
+    <script src="app.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+
+</body>
+</html>
